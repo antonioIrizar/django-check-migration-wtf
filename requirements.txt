@@ -13,3 +13,4 @@ six==1.13.0
 sqlparse==0.3.0
 wcwidth==0.1.7
 zipp==0.6.0
+codecov==2.0.15

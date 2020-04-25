@@ -13,7 +13,7 @@ class AbstractSQLRule(ABC):
         """Pattern for regex"""
 
     def is_match(self, sql_sentence: str) -> bool:
-        if self.regex.fullmatch(sql_sentence) is None:
+        if self.regex.fullmatch(sql_sentence.lower()) is None:
             return False
         else:
             return True

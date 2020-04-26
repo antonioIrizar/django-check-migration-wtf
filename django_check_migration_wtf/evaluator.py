@@ -15,7 +15,7 @@ class SQLRuleEvaluator(object):
         self.rules = [
             psql.RenameTableSQLRule(),
             psql.RenameColumnSQLRule(),
-            psql.AddColumnNotNullSQLRule,
+            psql.AddColumnNotNullSQLRule(),
             psql.AddColumnPrimaryKeySQLRule(),
             psql.AddColumnUniqueSQLRule(),
             psql.AlterColumnTypeSQLRule(),

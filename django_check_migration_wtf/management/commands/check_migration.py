@@ -5,7 +5,7 @@ from django.core.management.base import (
 from django.db import DEFAULT_DB_ALIAS, connections
 from django.db.migrations.executor import MigrationExecutor
 
-from ...evaluator import SQLRuleEvaluator
+from ...evaluator import SQLRuleEvaluator, SQLStatementsEvaluator
 from ...exceptions import SQLRuleError
 
 
@@ -41,17 +41,5 @@ class Command(BaseCommand):
                     # Mark it as applied/unapplied
                     if plan_node not in loader.applied_migrations:
                         print(f'App name: {app_name} - Migration: {title}')
-                        self.process_sql_statements(sql_statements)
-
-    def process_sql_statements(self, sql_statements: List[str]):
-        evaluator = SQLRuleEvaluator()
-        evaluator.load_psql_rules()
-        for sql_line in sql_statements:
-            if sql_line.startswith('--'):
-                continue
-            try:
-                evaluator.evaluate(sql_line)
-            except SQLRuleError as e:
-                print('SQL is not secure to do without downtime')
-                print(sql_line)
-                print(e)
+                        evaluator = SQLStatementsEvaluator(sql_statements)
+                        evaluator.evaluate()

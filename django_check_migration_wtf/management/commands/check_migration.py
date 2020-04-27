@@ -31,15 +31,15 @@ class Command(BaseCommand):
             for node in graph.leaf_nodes(app_name):
                 for plan_node in graph.forwards_plan(node):
 
-                    migration = loader.get_migration_by_prefix(plan_node[0], plan_node[1])
-                    self.output_transaction = migration.atomic
-
-                    plan = loader.graph.nodes[plan_node[0], plan_node[1]]
-                    sql_statements =executor.collect_sql([(plan, False)])
-
-                    title = plan_node[1]
                     # Mark it as applied/unapplied
                     if plan_node not in loader.applied_migrations:
+                        migration = loader.get_migration_by_prefix(plan_node[0], plan_node[1])
+                        self.output_transaction = migration.atomic and connection.features.can_rollback_ddl
+
+                        plan = loader.graph.nodes[plan_node[0], plan_node[1]]
+                        sql_statements = executor.collect_sql([(plan, False)])
+                        title = plan_node[1]
+
                         print(f'\033[1;36mApp name: {app_name} - Migration: {title}\033[0;37m')
                         evaluator = SQLStatementsEvaluator(sql_statements)
                         evaluator.evaluate()

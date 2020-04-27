@@ -58,9 +58,9 @@ class SQLStatementsEvaluator:
             try:
                 self.sql_rule_evaluator.evaluate(sql_line)
             except SQLRuleError as e:
-                print('SQL is not secure to do without downtime')
-                print(sql_line)
-                print(e)
+                print('\033[1;31m    SQL is not secure to do without downtime\033[0;37m')
+                print(f'\033[0;31m    {sql_line}\033[0;37m')
+                print(f'\033[0;31m    {e}\033[0;37m')
 
     def is_comment(self, sql_line: str) -> bool:
         return sql_line.startswith(self.SQL_COMMENT)

@@ -40,6 +40,6 @@ class Command(BaseCommand):
                     title = plan_node[1]
                     # Mark it as applied/unapplied
                     if plan_node not in loader.applied_migrations:
-                        print(f'App name: {app_name} - Migration: {title}')
+                        print(f'\033[1;36mApp name: {app_name} - Migration: {title}\033[0;37m')
                         evaluator = SQLStatementsEvaluator(sql_statements)
                         evaluator.evaluate()

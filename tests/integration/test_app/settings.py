@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_check_migration_wtf',
-    'test.test_integration.test_app',
+    'tests.integration.test_app',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'test.test_integration.test_app.urls'
+ROOT_URLCONF = 'tests.integration.test_app.urls'
 
 TEMPLATES = [
     {

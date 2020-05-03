@@ -17,5 +17,6 @@ setup(
     python_requires='>=3.7',
     install_requires=[
         'Django>=2.2,<2.3',
+        'PyGithub>=1.50,<2',
     ]
 )

@@ -8,3 +8,7 @@ class Car(models.Model):
 class Truck(models.Model):
     size = models.IntegerField(db_index=True)
     price = models.FloatField(db_index=True)
+
+
+class Motorbike(models.Model):
+    price = models.FloatField(db_index=True)

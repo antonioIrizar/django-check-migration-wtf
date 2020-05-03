@@ -123,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CHECK_MIGRATION_WTF_GITHUB_TOKEN = os.getenv('CHECK_MIGRATION_WTF_GITHUB_TOKEN', 'test')
+CHECK_MIGRATION_WTF_REPO_NAME = os.getenv('CHECK_MIGRATION_WTF_REPO_NAME', 'antonioirizar/django-check-migration-wtf')

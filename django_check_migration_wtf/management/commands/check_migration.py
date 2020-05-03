@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db import DEFAULT_DB_ALIAS, connections
 from django.db.migrations.executor import MigrationExecutor
 
@@ -16,6 +16,7 @@ class Command(BaseCommand):
         self.connection = connections[DEFAULT_DB_ALIAS]
         self.executor = MigrationExecutor(self.connection)
         self.loader = self.executor.loader
+        self.error = False
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -35,16 +36,21 @@ class Command(BaseCommand):
             for filename, migration_name in migrations:
                 app_name = self.get_app_name(filename)
                 self.evaluate_migration(app_name, migration_name)
-            return
 
-        # Work out which apps have migrations and which do not
-        graph = self.executor.loader.graph
-        for app_name in self.loader.migrated_apps:
-            for node in graph.leaf_nodes(app_name):
-                for plan_node in graph.forwards_plan(node):
-                    # Mark it as applied/unapplied
-                    if plan_node not in self.loader.applied_migrations:
-                        self.evaluate_migration(plan_node[0], plan_node[1])
+        else:
+            # Work out which apps have migrations and which do not
+            graph = self.executor.loader.graph
+            for app_name in self.loader.migrated_apps:
+                for node in graph.leaf_nodes(app_name):
+                    for plan_node in graph.forwards_plan(node):
+                        # Mark it as applied/unapplied
+                        if plan_node not in self.loader.applied_migrations:
+                            self.evaluate_migration(plan_node[0], plan_node[1])
+
+        if self.error:
+            raise CommandError('WTF!!!!!!!!!!! Migrations are not secure.')
+
+        self.stdout.write(self.style.SUCCESS('Migrations are secure.'))
 
     def evaluate_migration(self, app_label, migration_name):
         migration = self.loader.get_migration_by_prefix(app_label, migration_name)
@@ -58,9 +64,13 @@ class Command(BaseCommand):
         errors = evaluator.evaluate()
 
         for sql, error_info in errors:
-            self.stderr.write('    SQL is not secure to do without downtime')
+            self.error = True
+            self.stderr.write('    SQL is not secure to do without downtime.')
             self.stderr.write(f'    SQL sentence: {sql}', style_func=self.style.SQL_KEYWORD)
             self.stderr.write(f'    {error_info}', style_func=self.style.NOTICE)
+
+        if not errors:
+            self.stdout.write(self.style.SUCCESS('    Migration is secure.'))
 
     def get_app_name(self, filename) -> str:
         for app_name in self.loader.migrated_apps:

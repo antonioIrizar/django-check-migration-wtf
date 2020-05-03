@@ -53,9 +53,14 @@ class Command(BaseCommand):
         plan = self.loader.graph.nodes[app_label, migration_name]
         sql_statements = self.executor.collect_sql([(plan, False)])
 
-        print(f'\033[1;36mApp name: {app_label} - Migration: {migration_name}\033[0;37m')
+        self.stdout.write(self.style.MIGRATE_HEADING(f'App name: {app_label} - Migration: {migration_name}'))
         evaluator = SQLStatementsEvaluator(sql_statements)
-        evaluator.evaluate()
+        errors = evaluator.evaluate()
+
+        for sql, error_info in errors:
+            self.stderr.write('    SQL is not secure to do without downtime')
+            self.stderr.write(f'    SQL sentence: {sql}', style_func=self.style.SQL_KEYWORD)
+            self.stderr.write(f'    {error_info}', style_func=self.style.NOTICE)
 
     def get_app_name(self, filename) -> str:
         for app_name in self.loader.migrated_apps:

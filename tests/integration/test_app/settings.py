@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_check_migration_wtf',
     'tests.integration.test_app',
+    'tests.integration.test_app_github',
 ]
 
 MIDDLEWARE = [

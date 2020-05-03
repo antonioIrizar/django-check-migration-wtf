@@ -3,8 +3,8 @@ from typing import List
 
 from django.conf import settings
 
-from django_check_migration_wtf.exceptions import SQLRuleError
-from django_check_migration_wtf.rules import AbstractSQLRule
+from .exceptions import SQLRuleError
+from .rules import AbstractSQLRule
 from . import psql
 
 

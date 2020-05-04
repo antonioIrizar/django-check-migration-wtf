@@ -3,9 +3,6 @@ version: '3.7'
 services:
   postgres10:
     image: postgres:10-alpine
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
     ports:
       - 5432:5432
     volumes:
@@ -13,8 +10,14 @@ services:
 
   django-check-migration-wtf-tests:
     build: .
+    environment:
+      DB_HOST: postgres10
+      DB_USER: root
+      DB_PASSWORD: root
     depends_on:
       - postgres10
+    volumes:
+      - ".:/app"
 
 volumes:
   postgres10:

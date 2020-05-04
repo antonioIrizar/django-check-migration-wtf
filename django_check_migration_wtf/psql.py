@@ -118,13 +118,3 @@ class CreateIndexSQLRule(AbstractSQLRule):
     @property
     def error_info(self) -> str:
         return 'You cannot create a index without concurrently. It is a blocking operation.'
-
-
-class CreateSQLRule(AbstractSQLRule):
-    @property
-    def pattern(self) -> str:
-        return r'^CREATE TABLE "test_app_car" .*'
-
-    @property
-    def error_info(self) -> str:
-        return ''

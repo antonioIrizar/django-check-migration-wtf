@@ -1,10 +1,10 @@
 import re
-from typing import List
+from typing import List, Tuple, Optional
 
 from django.conf import settings
 
-from django_check_migration_wtf.exceptions import SQLRuleError
-from django_check_migration_wtf.rules import AbstractSQLRule
+from .exceptions import SQLRuleError
+from .rules import AbstractSQLRule
 from . import psql
 
 
@@ -46,7 +46,9 @@ class SQLStatementsEvaluator:
         self.sql_rule_evaluator.load_psql_rules()
         self.create_rex = re.compile(r'^create .*table (if not exists )?(?P<name>(".*"|.*[^\s]*)) \(.*')
 
-    def evaluate(self):
+    def evaluate(self) -> List[Optional[Tuple[str, SQLRuleError]]]:
+        errors = []
+        sql_line: str
         for sql_line in self.sql_statements:
             sql_line = sql_line.lower()
             if self.is_comment(sql_line):
@@ -58,9 +60,9 @@ class SQLStatementsEvaluator:
             try:
                 self.sql_rule_evaluator.evaluate(sql_line)
             except SQLRuleError as e:
-                print('\033[1;31m    SQL is not secure to do without downtime\033[0;37m')
-                print(f'\033[0;31m    {sql_line}\033[0;37m')
-                print(f'\033[0;31m    {e}\033[0;37m')
+                errors.append((sql_line, e))
+
+        return errors
 
     def is_comment(self, sql_line: str) -> bool:
         return sql_line.startswith(self.SQL_COMMENT)

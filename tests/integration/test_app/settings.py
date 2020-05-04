@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_check_migration_wtf',
-    'test.test_integration.test_app',
+    'tests.integration.test_app',
+    'tests.integration.test_app_github',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'test.test_integration.test_app.urls'
+ROOT_URLCONF = 'tests.integration.test_app.urls'
 
 TEMPLATES = [
     {
@@ -79,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', os.getenv('DB_USER', 'root')),
-        'HOST': os.getenv('DB_HOST', 'postgres10'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'USER': os.getenv('DB_USER', os.getenv('DB_USER', 'root')),
+        'PASSWORD': os.getenv('DB_PASSWORD', os.getenv('DB_PASSWORD', 'root')),
+        'HOST': os.getenv('DB_HOST', os.getenv('DB_PASSWORD', 'localhost')),
+        'PORT': os.getenv('DB_PORT',  os.getenv('DB_PORT', '5432')),
     }
 }
 
@@ -123,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CHECK_MIGRATION_WTF_GITHUB_TOKEN = os.getenv('CHECK_MIGRATION_WTF_GITHUB_TOKEN', 'test')
+CHECK_MIGRATION_WTF_REPO_NAME = os.getenv('CHECK_MIGRATION_WTF_REPO_NAME', 'antonioirizar/django-check-migration-wtf')

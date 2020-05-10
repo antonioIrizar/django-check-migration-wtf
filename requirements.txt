@@ -3,3 +3,4 @@ psycopg2-binary>=2.8, <2.9
 PyGithub>=1.50, <2.0
 pytest>=5.4, <5.5
 pytest-django>=3.9, <3.10
+tox>=3.15, <3.16

@@ -14,9 +14,9 @@ setup(
     author_email='antonioirizar@gmail.com',
     url='https://github.com/antonioIrizar/django-check-migration-wtf',
     license='GLP3',
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     install_requires=[
-        'Django>=2.2,<2.3',
+        'Django>=2.2,<3.1',
         'PyGithub>=1.50,<2',
     ]
 )

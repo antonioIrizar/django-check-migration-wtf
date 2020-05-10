@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.rst')).read()
+README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-check-migration-wtf',
@@ -10,6 +10,7 @@ setup(
     packages=find_packages(),
     description='A line of description',
     long_description=README,
+    long_description_content_type='text/markdown',
     author='Antonio Irizar',
     author_email='antonioirizar@gmail.com',
     url='https://github.com/antonioIrizar/django-check-migration-wtf',

@@ -16,7 +16,7 @@ setup(
     url='https://github.com/antonioIrizar/django-check-migration-wtf',
     license='GLP3',
     classifiers=[
-        'Development Status :: 1 - Production/Stable',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'License :: OSI Approved :: GLP3 License',

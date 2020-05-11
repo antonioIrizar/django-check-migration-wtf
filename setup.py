@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-check-migration-wtf',
-    version='0.2.0-beta',
+    version='1.0.0',
     packages=find_packages(),
     description='A line of description',
     long_description=README,
@@ -16,7 +16,7 @@ setup(
     url='https://github.com/antonioIrizar/django-check-migration-wtf',
     license='GLP3',
     classifiers=[
-        'Development Status :: 2 - Beta',
+        'Development Status :: 1 - Production/Stable',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'License :: OSI Approved :: GLP3 License',

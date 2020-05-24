@@ -17,7 +17,9 @@ class TestGithubMigrations:
     @pytest.mark.parametrize('filename',
                              ['test/bad_migrations/0001_32524.py',
                               'test/migrations/0001_32524.py.back',
-                              'test/migrations/0001_32524', ]
+                              'test/migrations/0001_32524',
+                              'test/migrations/__init__.py',
+                              ]
                              )
     def test_get_migration_name_return_none(self, filename, github_migrations):
         assert github_migrations.get_migration_name(filename) is None
@@ -29,6 +31,7 @@ class TestGithubMigrations:
             (GithubMigrations.FILE_STATUS_ADDED, '/test/migrations/bad', []),
             (GithubMigrations.FILE_STATUS_ADDED, '/test/migrations/0001_32524.py', [('/test/migrations/0001_32524.py', '0001_32524')]),
             (GithubMigrations.FILE_STATUS_MODIFIED, '/test/migrations/0001_32524.py', [('/test/migrations/0001_32524.py', '0001_32524')]),
+            (GithubMigrations.FILE_STATUS_MODIFIED, '/test/migrations/__init__0001_32524.py', [('/test/migrations/__init__0001_32524.py', '__init__0001_32524')]),
         ]
     )
     def test_migration(self, status, filename, expected, github_migrations):

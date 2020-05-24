@@ -17,7 +17,7 @@ class GithubMigrations:
         self.g = Github(settings.CHECK_MIGRATION_WTF_GITHUB_TOKEN)
         self.repo: Repository = self.g.get_repo(settings.CHECK_MIGRATION_WTF_REPO_NAME)
         self.comp: Comparison = self.repo.compare(base_branch, commit_hash)
-        self.migration_name_regex = re.compile(r'(?P<path>.*)/migrations/(?P<migration_name>.*).py\Z')
+        self.migration_name_regex = re.compile(r'(?P<path>.*)/migrations/(?P<migration_name>(?!__init__.py).*).py\Z')
 
     @property
     def migrations(self) -> List[Tuple[str, str]]:

@@ -57,7 +57,11 @@ class Command(BaseCommand):
         self.output_transaction = migration.atomic and self.connection.features.can_rollback_ddl
 
         plan = self.loader.graph.nodes[app_label, migration_name]
-        sql_statements = self.executor.collect_sql([(plan, False)])
+        if hasattr(self.executor, 'collect_sql'):
+            # support django <3.1
+            sql_statements = self.executor.collect_sql([(plan, False)])
+        else:
+            sql_statements = self.executor.loader.collect_sql([(plan, False)])
 
         self.stdout.write(self.style.MIGRATE_HEADING(f'App name: {app_label} - Migration: {migration_name}'))
         evaluator = SQLStatementsEvaluator(sql_statements)

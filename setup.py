@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-check-migration-wtf',
-    version='1.0.1',
+    version='1.1.0',
     packages=find_packages(),
     description='A line of description',
     long_description=README,
@@ -27,6 +27,7 @@ setup(
         'Framework :: Django',
         'Framework :: Django :: 2.2',
         'Framework :: Django :: 3.0',
+        'Framework :: Django :: 3.1',
     ],
     keywords='django postgres postgresql migrations',
     python_requires='>=3.6',

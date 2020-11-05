@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-check-migration-wtf',
-    version='1.1.2',
+    version='1.2.0',
     packages=find_packages(),
     description='A line of description',
     long_description=README,

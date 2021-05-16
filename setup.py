@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.md')).read()
 
 setup(
     name='django-check-migration-wtf',
-    version='1.2.0',
+    version='1.3.0',
     packages=find_packages(),
     description='A line of description',
     long_description=README,
@@ -29,11 +29,12 @@ setup(
         'Framework :: Django :: 2.2',
         'Framework :: Django :: 3.0',
         'Framework :: Django :: 3.1',
+        'Framework :: Django :: 3.2',
     ],
     keywords='django postgres postgresql migrations',
     python_requires='>=3.6',
     install_requires=[
-        'Django>=2.2,<3.2',
+        'Django>=2.2,<3.3',
         'PyGithub>=1.50,<2',
     ]
 )

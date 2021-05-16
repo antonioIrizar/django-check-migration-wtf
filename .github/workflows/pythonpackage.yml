@@ -11,7 +11,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:10-alpine
+        image: postgres:${{ matrix.postgres-version }}-alpine
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
@@ -28,10 +28,11 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
+        postgres-version: [10, 11, 12]
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ matrix.python-version }} ${{ matrix.postgres-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}

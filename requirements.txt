@@ -1,4 +1,4 @@
-Django>=2.2, <3.2
+Django>=2.2, <3.3
 psycopg2-binary>=2.8, <2.9
 PyGithub>=1.50, <2.0
 pytest>=5.4, <5.5

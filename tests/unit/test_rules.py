@@ -118,6 +118,7 @@ class TestAlterColumnAddConstraintSQLRule:
         'ALTER TABLE test ADD CONSTRAINT constraint_test FOREIGN KEY (column_test) REFERENCES column_test (column_test) MATCH FULL NOT VALID;',
         'ALTER TABLE test ADD CONSTRAINT constraint_test PRIMARY KEY USING INDEX index_test;',
         'ALTER TABLE test ADD CONSTRAINT constraint_test UNIQUE USING INDEX index_test ;',
+        'ALTER TABLE "test" ADD CONSTRAINT "constraint_test" UNIQUE USING INDEX "constraint_test" DEFERRABLE INITIALLY DEFERRED;',
     ])
     def test_not_match(self, sql_sentence):
         rule = psql.AlterColumnAddConstraintSQLRule()

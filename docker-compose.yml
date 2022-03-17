@@ -7,12 +7,14 @@ services:
       - 5432:5432
     volumes:
       - postgres10:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: root
 
   django-check-migration-wtf-tests:
     build: .
     environment:
       DB_HOST: postgres10
-      DB_USER: root
+      DB_USER: postgres
       DB_PASSWORD: root
     depends_on:
       - postgres10

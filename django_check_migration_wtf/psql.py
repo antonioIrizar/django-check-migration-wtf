@@ -90,7 +90,7 @@ class AlterColumnTypeSQLRule(AbstractSQLRule):
 class AlterColumnAddConstraintSQLRule(AbstractSQLRule):
     @property
     def pattern(self) -> str:
-        return r'alter table .* add constraint ((".*").)*((?!not valid( |;))(?!using index ).)*;'
+        return r'alter table .* add constraint ("[^"]*" )?((?!not valid( |;))(?!using index ).)*;'
 
     @property
     def error_info(self) -> str:

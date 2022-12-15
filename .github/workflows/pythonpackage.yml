@@ -25,9 +25,9 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
     strategy:
-      max-parallel: 4
+      max-parallel: 8
       matrix:
-        python-version: [3.7, 3.8, 3.9, 3.10]
+        python-version: ['3.7', '3.8', '3.9', '3.10']
         postgres-version: [10, 11, 12]
 
     steps:

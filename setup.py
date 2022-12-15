@@ -29,11 +29,12 @@ setup(
         'Framework :: Django :: 3.0',
         'Framework :: Django :: 3.1',
         'Framework :: Django :: 3.2',
+        'Framework :: Django :: 4.0',
     ],
     keywords='django postgres postgresql migrations',
     python_requires='>=3.7',
     install_requires=[
-        'Django>=2.2,<3.3',
+        'Django>=2.2,<4.1',
         'PyGithub>=1.50,<2',
     ]
 )

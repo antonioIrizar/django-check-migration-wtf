@@ -28,7 +28,7 @@ jobs:
       max-parallel: 8
       matrix:
         python-version: ['3.7', '3.8', '3.9', '3.10']
-        postgres-version: [10, 11, 12, 13]
+        postgres-version: [10, 11, 12, 13, 14]
 
     steps:
     - uses: actions/checkout@v3

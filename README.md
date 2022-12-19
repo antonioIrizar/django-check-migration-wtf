@@ -8,7 +8,7 @@ on environments with zero downtime.
 In some situations Django Migration system generate migrations to need do a downtime because they are blocking operation 
 or you write custom migration than can block you database.
 
-Actually this extension only works for backends of PostgresSQL and Postgis.
+Actually this extension only works for backends of PostgresSQL and Postgis, versions support 11, 12, 13 and 14.
 
 **Advise**: this extension notify you for common blocking operations on database. Anyway you should review your migrations and understand their.
 

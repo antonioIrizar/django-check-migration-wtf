@@ -1,6 +1,6 @@
-Django>=2.2, <3.3
-psycopg2-binary>=2.8, <2.9
+Django>=2.2, <4.1
+psycopg2-binary>=2.9, <2.10
 PyGithub>=1.50, <2.0
-pytest>=5.4, <5.5
-pytest-django>=3.9, <3.10
-tox>=3.15, <3.16
+pytest>=7.2, <8
+pytest-django>=4.5, <5
+tox>=4, <5
